@@ -4,10 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
+    <link href="/static/app.css" rel="stylesheet" type="text/css">
+
 </head>
 <body>
     
     <h1> Weather App </h1>
+
+    <form action="/" method="post">
+        <input type="text" id="cityName" name="cityName" placeholder="City"/>
+        <input type="text" id="stateName" name="stateName" placeholder="State Code (Optional)"/>
+        <input type="text" id="countryName" name="countryName" placeholder="Country"/>
+        <button name = 'action'>Find</button>
+    </form>
+
+    <h2> Weather: </h2>
+        <h3>
+            <div class="weather">
+            <ul>
+                <div class="searched_weather">
+                    {% if data %}
+                    <li>
+                        <strong>{{ data.name_location }}, 
+                        {% if state %}{{ state }}, {% endif %}
+                        {{ data.country_location }}</strong>
+                        <img src="https://openweathermap.org/img/wn/{{ data.weather_icon }}@2x.png" alt="Weather Icon">
+                        <p><strong>{{ data.weather_main }}:</strong> {{ data.weather_description }}</p>
+                        <p><strong>Temperature:</strong> {{ data.weather_temperature }}°C</p>
+                        <p><strong>Min/Max:</strong> {{ data.weather_min_temperature }}°C / {{ data.weather_max_temperature }}°C</p>
+                        <p><strong>Feels Like:</strong> {{ data.weather_feels_like_temperature }}°C</p>
+                        <p><strong>Humidity:</strong> {{ data.weather_humidity }}%</p>
+                        <p><strong>Wind Speed:</strong> {{ data.weather_wind_speed }} m/s</p>
+                    </li>
+                    {% endif %}
+                </div>
+            </ul>
+            </div>
+        </h3>
+
+    <h2> Recent Searches: </h2>
+        <div class="recent_search_list">
+            <ul>
+            {% for item in recent_searches %}
+                <li>
+                    <h3><strong>{{ item['name_location'] }}, 
+                    {% if item['state_location'] %}{{ item['state_location'] }}, {% endif %}
+                    {{ item['country_location'] }}</strong></h3>
+                    <img src="https://openweathermap.org/img/wn/{{ item['weather_icon'] }}@2x.png" alt="Weather Icon">
+                    <p><strong>{{ item['weather_main'] }}:</strong> {{ item['weather_description'] }}</p>
+                    <p><strong>Temperature:</strong> {{ item['weather_temperature'] }}°C</p>
+                    <p><strong>Min/Max:</strong> {{ item['weather_min_temperature'] }}°C / {{ item['weather_max_temperature'] }}°C</p>
+                    <p><strong>Feels Like:</strong> {{ item['weather_feels_like_temperature'] }}°C</p>
+                    <p><strong>Humidity:</strong> {{ item['weather_humidity'] }}%</p>
+                    <p><strong>Wind Speed:</strong> {{ item['weather_wind_speed'] }} m/s</p>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
 
 </body>
 </html>

@@ -2,6 +2,7 @@ import requests
 from dotenv import load_dotenv
 import os
 from dataclasses import dataclass
+from databaseFunctions import database_insert
 
 load_dotenv()
 API_key = os.getenv('API_KEY')
@@ -45,7 +46,6 @@ def get_weather(lat, lon, API_key):
     if lat is not None and lon is not None:
         try:
             weather_response = requests.get(f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API_key}&units=metric")
-
             if weather_response.status_code == 200:
                 weather_response = weather_response.json()
 
@@ -61,11 +61,11 @@ def get_weather(lat, lon, API_key):
                 weather_humidity = weather_response.get('main').get('humidity'),
                 weather_wind_speed = weather_response.get('wind').get('speed'),
                 country_location = weather_response.get('sys').get('country'),
-                name_location = weather_response.get('sys').get('name'),
+                name_location = weather_response.get('name'),
 
                 )
-
-                print(data)
+                print("------------------------\n  weather_response received \n", weather_response, "\n ---------------------------")
+                return data
 
             else:
                 print(f'No data found for weather: {weather_response.status_code}')
@@ -76,8 +76,9 @@ def get_weather(lat, lon, API_key):
 def main(city_name, state_name, country_code, API_key):
     lat, lon = get_lat_and_lon(city_name, state_name, country_code, API_key)
     weather_data = get_weather(lat, lon, API_key)
-    return weather_data
 
-# COME BACK HERE AFTER FLASK
-if __name__ == '__main__':
-    main()
+    if weather_data:
+        print("------------------------\n  if weather_data passed \n ---------------------")
+        database_insert(weather_data, state_name)
+
+    return weather_data
