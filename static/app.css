@@ -1,4 +1,113 @@
-html {
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
     background-color: rgb(35, 38, 41);
     color: beige;
+    font-family: Arial, sans-serif;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.input_parent {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.input_parent button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.input_parent button:hover {
+    background-color: #0056b3;
+}
+
+.weather_parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.searched_weather {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #333;
+    border-radius: 20px;
+    padding: 20px;
+    width: 80%;
+    max-width: 800px;
+    flex-grow: 1;
+}
+.searched_weather_left {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.searched_weather_name h3 {
+    font-size: 24px;
+    margin-right: 20px;
+}
+.searched_weather_right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.searched_weather_info_left,
+.searched_weather_info_right {
+    margin-bottom: 10px;
+}
+
+.recent_search_list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+.recent_search_weather {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #333;
+    border-radius: 20px;
+    padding: 20px;
+    width: 30%;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+.recent_search_weather h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.recent_search_weather p {
+    margin-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+    .recent_search_list {
+        flex-direction: column;
+        align-items: center;
+    }
+    .recent_search_weather {
+        width: 80%;
+    }
+
+    .input_parent {
+        display: flex;
+        flex-direction: column;
+    }
+
 }

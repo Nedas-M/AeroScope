@@ -64,7 +64,7 @@ def get_weather(lat, lon, API_key):
                 name_location = weather_response.get('name'),
 
                 )
-                print("------------------------\n  weather_response received \n", weather_response, "\n ---------------------------")
+                print("------------------------\n  weather_response received \n", weather_response, "\n------------------------")
                 return data
 
             else:
@@ -78,7 +78,7 @@ def main(city_name, state_name, country_code, API_key):
     weather_data = get_weather(lat, lon, API_key)
 
     if weather_data:
-        print("------------------------\n  if weather_data passed \n ---------------------")
+        print("------------------------\n  if weather_data passed \n------------------------")
         database_insert(weather_data, state_name)
 
     return weather_data
